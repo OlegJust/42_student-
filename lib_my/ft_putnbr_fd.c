@@ -1,28 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opidhorn <opidhorn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 14:39:19 by opidhorn          #+#    #+#             */
-/*   Updated: 2024/11/14 13:26:07 by opidhorn         ###   ########.fr       */
+/*   Created: 2024/11/13 13:42:32 by opidhorn          #+#    #+#             */
+/*   Updated: 2024/11/13 13:42:45 by opidhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+static int	ft_abs(int nbr)
 {
-	unsigned char	*p;
+	if (nbr < 0)
+		return (-nbr);
+	else
+		return (nbr);
+}
 
-	p = (unsigned char *)s;
-	while (n--)
+void	ft_putnbr_fd(int n, int fd)
+{
+	char	str[13];
+	int		is_neg;
+	int		length;
+
+	is_neg = (n < 0);
+	ft_bzero(str, 13);
+	if (n == 0)
+		str[0] = '0';
+	length = 0;
+	while (n != 0)
 	{
-		if (*p != (unsigned char)c)
-			p++;
-		else
-			return (p);
+		str[length++] = '0' + ft_abs(n % 10);
+		n = (n / 10);
 	}
-	return (0);
+	if (is_neg)
+		str[length] = '-';
+	else if (length > 0)
+		length--;
+	while (length >= 0)
+		write(fd, &str[length--], 1);
 }

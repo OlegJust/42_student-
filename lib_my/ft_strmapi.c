@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opidhorn <opidhorn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 14:39:19 by opidhorn          #+#    #+#             */
-/*   Updated: 2024/11/14 13:26:07 by opidhorn         ###   ########.fr       */
+/*   Created: 2024/11/13 13:27:20 by opidhorn          #+#    #+#             */
+/*   Updated: 2024/11/13 13:29:28 by opidhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memchr(const void *s, int c, size_t n)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	unsigned char	*p;
+	char	*str;
+	size_t	i;
 
-	p = (unsigned char *)s;
-	while (n--)
+	str = ft_strdup(s);
+	if (!(str))
+		return (NULL);
+	i = 0;
+	while (str[i])
 	{
-		if (*p != (unsigned char)c)
-			p++;
-		else
-			return (p);
+		str[i] = (*f)(i, str[i]);
+		i++;
 	}
-	return (0);
+	return (str);
 }

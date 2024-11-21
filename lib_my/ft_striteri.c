@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memchr.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: opidhorn <opidhorn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/11 14:39:19 by opidhorn          #+#    #+#             */
-/*   Updated: 2024/11/14 13:26:07 by opidhorn         ###   ########.fr       */
+/*   Created: 2024/11/13 13:32:16 by opidhorn          #+#    #+#             */
+/*   Updated: 2024/11/13 13:34:10 by opidhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	*ft_memchr(const void *s, int c, size_t n)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	unsigned char	*p;
+	unsigned int	i;
 
-	p = (unsigned char *)s;
-	while (n--)
+	if (!s || !(*s) || !f)
+		return ;
+	i = 0;
+	while (s[i])
 	{
-		if (*p != (unsigned char)c)
-			p++;
-		else
-			return (p);
+		f(i, &s[i]);
+		++i;
 	}
-	return (0);
 }

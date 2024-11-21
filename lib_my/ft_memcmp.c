@@ -6,7 +6,7 @@
 /*   By: opidhorn <opidhorn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:43:52 by opidhorn          #+#    #+#             */
-/*   Updated: 2024/11/11 14:44:05 by opidhorn         ###   ########.fr       */
+/*   Updated: 2024/11/14 13:26:43 by opidhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,20 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t			i;
+	unsigned char	*p1;
+	unsigned char	*p2;
 
-	i = 0;
-	while (i < n)
+	p1 = (unsigned char *)s1;
+	p2 = (unsigned char *)s2;
+	while (n--)
 	{
-		if (*(unsigned char*)(s1 + i) != *(unsigned char*)(s2 + i))
-			return (*(unsigned char*)(s1 + i) - *(unsigned char*)(s2 + i));
-		i++;
+		if (*p1 != *p2)
+			return (*p1 - *p2);
+		else
+		{
+			p1++;
+			p2++;
+		}
 	}
 	return (0);
 }

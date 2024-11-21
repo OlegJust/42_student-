@@ -6,7 +6,7 @@
 /*   By: opidhorn <opidhorn@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 14:47:25 by opidhorn          #+#    #+#             */
-/*   Updated: 2024/11/11 14:47:29 by opidhorn         ###   ########.fr       */
+/*   Updated: 2024/11/14 10:03:08 by opidhorn         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,20 @@ int	ft_atoi(const char *str)
 	int	is_neg;
 	int	res;
 
-	if (!str)
-		return (0);
 	i = 0;
-	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v' ||
-			str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
+	is_neg = 1;
+	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v'
+		|| str[i] == '\f' || str[i] == '\r' || str[i] == ' ')
 		i++;
-	is_neg = (str[i] == '-') ? -1 : 1;
-	if (is_neg == -1 || str[i] == '+')
+	if (str[i] == '-')
+		is_neg = -1;
+	if (str[i] == '-' || str[i] == '+')
 		i++;
 	res = 0;
 	while (str[i] >= '0' && str[i] <= '9')
-		res = (res * 10) + (str[i++] - '0');
+	{
+		res = (res * 10) + (str[i] - '0');
+		i++;
+	}
 	return (res * is_neg);
 }
